@@ -1,0 +1,234 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 5rem 10rem;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    font-family: "Roboto", sans-serif;
+}
+
+aside {
+    display: inline-block;
+    height: 100%;
+}
+
+#name {
+    margin: 0;
+    font-size: 2em;
+}
+
+#socials {
+    display: flex;
+    gap: 0.5em;
+}
+
+#socials>a {
+    text-decoration: none;
+}
+
+#socials>a>svg {
+    width: 2em;
+    height: 2em;
+
+    fill: #000000;
+}
+
+#socials>a>svg:hover {
+    fill: rgb(80, 80, 80);
+}
+
+nav {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 2em;
+}
+
+.nav-button {
+    background: none;
+    text-align: left;
+    font-size: 1.5em;
+    border: none;
+    padding: 5px 0px;
+
+    text-decoration: underline;
+    outline: none;
+
+    transition: transform 0.1s;
+}
+
+.nav-button:not(.nav-button[active]):hover {
+    cursor: pointer;
+    transform: translateX(5px);
+}
+
+.nav-button[active] {
+    font-weight: bold;
+}
+
+#nav-content-wrapper {
+    flex: 1;
+    padding-left: 5rem;
+    overflow: hidden;
+}
+
+.nav-content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.pill-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+
+    height: 100%;
+}
+
+.pill-groups .group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.pill-groups .group h2 {
+    margin: 0px;
+    font-size: 1.5em;
+}
+
+.pill-groups .group .pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 0.25em;
+}
+
+.pill-groups .group .pills .pill {
+    display: inline-block;
+    padding: 0.25em 1em;
+    border-radius: 6px;
+}
+
+.xp-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+
+    height: 100%;
+}
+
+.xp-groups .group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.xp-groups .group h2 {
+    margin: 0px;
+    font-size: 1.5em;
+}
+
+.xp-groups .group .xps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.75em;
+}
+
+.xp-groups .group .xp {
+    display: flex;
+    flex-direction: column;
+
+    padding: 1em;
+    border-radius: 6px;
+    background-color: rgb(220, 220, 220);
+}
+
+.xp-groups .group .xp h3 {
+    font-size: 1.125em;
+    margin: 0px;
+}
+
+.xp-groups .group .xp .date,
+.xp-groups .group .xp .position {
+    display: block;
+    font-size: 0.9em;
+}
+
+.xp-groups .group .xp .links {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.xp-groups .group .xp a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.xp-groups .group .xp a:hover {
+    text-decoration: underline;
+}
+
+.xp-groups .group .xp a::before {
+    content: "↗ ";
+}
+
+@media (max-width: 1366px) or (max-height: 768px) {
+    body {
+        padding: 3rem;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 1024px) {
+    :root {
+        font-size: 1.25rem;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 720px) {
+    :root {
+        font-size: 1rem;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 430px) {
+    :root {
+        font-size: 0.75rem;
+    }
+}
+
+@media (orientation: portrait) {
+    body {
+        padding: 1rem;
+        flex-direction: column;
+    }
+
+    aside {
+        position: relative;
+        margin-bottom: 2em;
+        height: auto;
+    }
+
+    nav {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        align-items: end;
+    }
+
+    nav .nav-button {
+        padding: 0px;
+    }
+
+    #nav-content-wrapper {
+        padding-left: 0px;
+    }
+}
+

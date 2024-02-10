@@ -40,7 +40,7 @@ aside {
 }
 
 #socials>a>svg:hover {
-    fill: rgb(80, 80, 80);
+    opacity: 0.5;
 }
 
 nav {
@@ -232,3 +232,25 @@ nav {
     }
 }
 
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #151515;
+        color: #ffffff;
+    }
+
+    aside #socials>a>svg {
+        fill: #ffffff;
+    }
+
+    nav .nav-button {
+        color: #ffffff;
+    }
+
+    .xp-groups .group .xp {
+        background-color: rgb(60, 60, 60);
+    }
+
+    .xp-groups .group .xp a {
+        color: #ffffff;
+    }
+}

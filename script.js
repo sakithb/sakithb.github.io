@@ -227,9 +227,6 @@ class SkillsContentElement extends HTMLElement {
                     pillFg = 100;
                 }
 
-                pill.setAttribute("pillFg", pillFg.toString());
-                pill.setAttribute("pillBg", pillBg.toString());
-
                 pill.textContent = item.name;
                 pill.style.backgroundColor = `hsl(0, 0%, ${Math.round(pillBg)}%)`;
                 pill.style.color = `hsl(0, 0%, ${pillFg}%)`;

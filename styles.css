@@ -106,14 +106,15 @@ nav {
 .pill-groups .group .pills {
     display: flex;
     flex-wrap: wrap;
-    align-items: end;
-    gap: 0.25em;
+    align-items: stretch;
+    gap: 0.3em;
 }
 
 .pill-groups .group .pills .pill {
-    display: inline-block;
+    display: inline-flex;
     padding: 0.25em 1em;
-    border-radius: 6px;
+    border-radius: 5px;
+    align-items: center;
 }
 
 .xp-groups {
@@ -234,7 +235,7 @@ nav {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #151515;
+        background-color: rgb(10, 10, 10);
         color: #ffffff;
     }
 

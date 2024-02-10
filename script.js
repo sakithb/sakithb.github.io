@@ -28,12 +28,12 @@ const skillGroups = [
     {
         name: "Languages",
         items: [
-            { name: "Javascript", xp: 0.8 },
-            { name: "Typescript", xp: 0.8 },
-            { name: "HTML/CSS", xp: 0.8 },
+            { name: "Javascript", xp: 1.0 },
+            { name: "Typescript", xp: 1.0 },
+            { name: "HTML/CSS", xp: 1.0 },
             { name: "Go", xp: 0.4 },
             { name: "PHP", xp: 0.5 },
-            { name: "Python", xp: 0.7 },
+            { name: "Python", xp: 0.8 },
             { name: "C", xp: 0.3 },
             { name: "Bash", xp: 0.7 },
             { name: "SQL", xp: 0.4 },
@@ -47,11 +47,11 @@ const skillGroups = [
             { name: "SolidJS", xp: 0.7 },
             { name: "Svelte", xp: 0.6 },
             { name: "Templ", xp: 0.3 },
-            { name: "HTMX", xp: 0.3 },
-            { name: "Web Components", xp: 0.4 },
-            { name: "GTK", xp: 0.6 },
-            { name: "Tailwind CSS", xp: 0.7 },
-            { name: "Material UI", xp: 0.7 },
+            { name: "HTMX", xp: 0.4 },
+            { name: "Web Components", xp: 0.5 },
+            { name: "GTK", xp: 0.7 },
+            { name: "Tailwind CSS", xp: 0.8 },
+            { name: "Material UI", xp: 0.6 },
         ],
     },
     {
@@ -211,6 +211,8 @@ class SkillsContentElement extends HTMLElement {
 
             const groupPills = document.createElement("div");
             groupPills.classList.add("pills");
+
+            // group.items.sort((a, b) => b.xp - a.xp);
 
             for (const item of group.items) {
                 const pill = document.createElement("div");

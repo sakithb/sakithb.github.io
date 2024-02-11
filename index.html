@@ -51,16 +51,19 @@
         </span>
 
         <nav>
-            <button is="nav-button" name="skills" active>Skills</button>
-            <button is="nav-button" name="experience">Experience</button>
+            <nav-button name="about" active></nav-button>
+            <nav-button name="skills"></nav-button>
+            <nav-button name="experience"></nav-button>
         </nav>
     </aside>
 
     <div id="nav-content-wrapper">
+        <about-content active></about-content> 
         <skills-content></skills-content>
         <experience-content></experience-content>
     </div>
- 
+
+    <!-- <script src="https://unpkg.com/@ungap/custom-elements/es.js"></script> -->
     <script src="script.js"></script>
 </body>
 

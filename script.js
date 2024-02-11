@@ -152,11 +152,77 @@ const experienceGroups = [
     },
 ];
 
-class NavButtonElement extends HTMLButtonElement {
-    static define() {
-        customElements.define("nav-button", NavButtonElement, {
-            extends: "button",
+let isNavScrolling = false;
+
+const navContentWrapper = document.querySelector("#nav-content-wrapper");
+const intersectionObserver = new IntersectionObserver(observeIntersections, {
+    root: navContentWrapper,
+    threshold: [0, 0.25, 0.5, 0.75, 1],
+});
+
+const navRect = navContentWrapper.getBoundingClientRect();
+const navTop = Math.round(navRect.top);
+const navBottom = Math.round(navRect.bottom);
+
+/**
+ * @param {HTMLElement} content
+ */
+function onNavScroll(content) {
+    isNavScrolling = true;
+
+    const frameCallback = () => {
+        const contentRect = content.getBoundingClientRect();
+        if (
+            Math.round(contentRect.top) === navTop ||
+            Math.round(contentRect.bottom) === navBottom
+        ) {
+            isNavScrolling = false;
+        } else {
+            window.requestAnimationFrame(frameCallback);
+        }
+    };
+
+    window.requestAnimationFrame(frameCallback);
+}
+
+/**
+ * @param {IntersectionObserverEntry[]} entries
+ */
+function observeIntersections(entries) {
+    if (isNavScrolling) return;
+
+    for (const entry of entries) {
+        entry.target.setAttribute("intersecting-ratio", entry.intersectionRatio.toString());
+    }
+
+    let currentName;
+    let currentRatio = 0;
+    let currentActive = false;
+
+    for (const child of /** @type {HTMLCollectionOf<NavContentElement>} */ (
+        navContentWrapper.children
+    )) {
+        const intersectingRatio = parseFloat(child.getAttribute("intersecting-ratio"));
+
+        if (intersectingRatio > currentRatio) {
+            currentName = child.name;
+            currentRatio = intersectingRatio;
+            currentActive = child.hasAttribute("active");
+        }
+    }
+
+    if (currentName !== undefined && currentActive === false) {
+        const event = new CustomEvent("nav-changed", {
+            detail: { name: currentName },
         });
+
+        window.dispatchEvent(event);
+    }
+}
+
+class NavButtonElement extends HTMLElement {
+    static define() {
+        customElements.define("nav-button", NavButtonElement);
     }
 
     constructor() {
@@ -165,9 +231,11 @@ class NavButtonElement extends HTMLButtonElement {
     }
 
     connectedCallback() {
+        this.name = this.getAttribute("name");
+
         this.addEventListener("click", () => {
             const event = new CustomEvent("nav-changed", {
-                detail: { name: this.name },
+                detail: { name: this.name, click: true },
             });
 
             window.dispatchEvent(event);
@@ -180,30 +248,93 @@ class NavButtonElement extends HTMLButtonElement {
                 this.removeAttribute("active");
             }
         });
+
+        this.innerText = this.normalizeName();
+    }
+
+    normalizeName() {
+        return (
+            this.name.charAt(0).toUpperCase() +
+            this.name.slice(1).replace(/_/g, " ")
+        );
     }
 }
 
-class SkillsContentElement extends HTMLElement {
-    static define() {
-        customElements.define("skills-content", SkillsContentElement);
-    }
+class NavContentElement extends HTMLElement {
+    /** @type {string} */
+    name;
 
     constructor() {
         super();
         this.classList.add("nav-content");
     }
 
+    /** @param {CustomEvent} e */
     onNavChanged(e) {
-        if (e.detail.name === "skills") {
-            this.scrollIntoView({ behavior: "smooth" });
+        if (e.detail.name === this.name) {
+            this.setAttribute("active", "");
+
+            if (e.detail.click) {
+                this.scrollIntoView({ behavior: "smooth" });
+                onNavScroll(this);
+            }
+        } else {
+            this.removeAttribute("active");
         }
     }
 
-    connectedCallback() {
-        window.addEventListener("nav-changed", this.onNavChanged.bind(this));
+    onClick() {
+        const event = new CustomEvent("nav-changed", {
+            detail: { name: this.name, click: true },
+        });
 
-        const pillGroups = document.createElement("div");
-        pillGroups.classList.add("pill-groups");
+        window.dispatchEvent(event);
+    }
+
+    connectedCallback() {
+        this.addEventListener("click", this.onClick.bind(this));
+        window.addEventListener("nav-changed", this.onNavChanged.bind(this));
+        intersectionObserver.observe(this);
+    }
+
+    disconnectedCallback() {
+        window.removeEventListener("nav-changed", this.onNavChanged.bind(this));
+        intersectionObserver.unobserve(this);
+    }
+}
+
+class AboutContentElement extends NavContentElement {
+    static define() {
+        customElements.define("about-content", AboutContentElement);
+    }
+
+    constructor() {
+        super();
+        this.name = "about";
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        const aboutText = document.createElement("p");
+        aboutText.textContent = `I'm a web developer from Sri Lanka. I have been professionally developing web applications for over 3 years and have been practicing programming as a hobby for over 6 years. I have a passion for creating software and solving problems. I'm always looking for new opportunities to learn and grow.`;
+
+        this.appendChild(aboutText);
+    }
+}
+
+class SkillsContentElement extends NavContentElement {
+    static define() {
+        customElements.define("skills-content", SkillsContentElement);
+    }
+
+    constructor() {
+        super();
+        this.name = "skills";
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
 
         for (const group of skillGroups) {
             const groupName = document.createElement("h2");
@@ -211,9 +342,7 @@ class SkillsContentElement extends HTMLElement {
 
             const groupPills = document.createElement("div");
             groupPills.classList.add("pills");
-
-            // group.items.sort((a, b) => b.xp - a.xp);
-
+            group.items.sort((a, b) => b.xp - a.xp);
             for (const item of group.items) {
                 const pill = document.createElement("div");
                 pill.classList.add("pill");
@@ -222,10 +351,10 @@ class SkillsContentElement extends HTMLElement {
                 let pillFg;
 
                 if (item.xp < 0.5) {
-                    pillBg = 60 + 20 * (item.xp * 2);
+                    pillBg = 90 - 20 * (item.xp * 2);
                     pillFg = 0;
                 } else {
-                    pillBg = 40 - 20 * (2 * item.xp - 1);
+                    pillBg = 40 - 15 * (2 * item.xp - 1);
                     pillFg = 100;
                 }
 
@@ -241,38 +370,23 @@ class SkillsContentElement extends HTMLElement {
 
             groupElement.appendChild(groupName);
             groupElement.appendChild(groupPills);
-            pillGroups.appendChild(groupElement);
+            this.appendChild(groupElement);
         }
-
-        this.appendChild(pillGroups);
-    }
-
-    disconnectedCallback() {
-        window.removeEventListener("nav-changed", this.onNavChanged.bind(this));
     }
 }
 
-class ExperienceContentElement extends HTMLElement {
+class ExperienceContentElement extends NavContentElement {
     static define() {
         customElements.define("experience-content", ExperienceContentElement);
     }
 
     constructor() {
         super();
-        this.classList.add("nav-content");
-    }
-
-    onNavChanged(e) {
-        if (e.detail.name === "experience") {
-            this.scrollIntoView({ behavior: "smooth" });
-        }
+        this.name = "experience";
     }
 
     connectedCallback() {
-        window.addEventListener("nav-changed", this.onNavChanged.bind(this));
-
-        const xpGroups = document.createElement("div");
-        xpGroups.classList.add("xp-groups");
+        super.connectedCallback();
 
         for (const group of experienceGroups) {
             const groupName = document.createElement("h2");
@@ -325,17 +439,12 @@ class ExperienceContentElement extends HTMLElement {
 
             groupElement.appendChild(groupName);
             groupElement.appendChild(groupXps);
-            xpGroups.appendChild(groupElement);
+            this.appendChild(groupElement);
         }
-
-        this.appendChild(xpGroups);
-    }
-
-    disconnectedCallback() {
-        window.removeEventListener("nav-changed", this.onNavChanged.bind(this));
     }
 }
 
 NavButtonElement.define();
 SkillsContentElement.define();
+AboutContentElement.define();
 ExperienceContentElement.define();

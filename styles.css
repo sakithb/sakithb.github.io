@@ -39,10 +39,6 @@ aside {
     fill: #000000;
 }
 
-#socials>a>svg:hover {
-    opacity: 0.5;
-}
-
 nav {
     display: inline-flex;
     flex-direction: column;
@@ -50,7 +46,7 @@ nav {
 }
 
 .nav-button {
-    background: none;
+    background: transparent;
     text-align: left;
     font-size: 1.5em;
     border: none;
@@ -59,12 +55,7 @@ nav {
     text-decoration: underline;
     outline: none;
 
-    transition: transform 0.1s;
-}
-
-.nav-button:not(.nav-button[active]):hover {
-    cursor: pointer;
-    transform: translateX(5px);
+    transition: transform 0.25s;
 }
 
 .nav-button[active] {
@@ -74,75 +65,87 @@ nav {
 #nav-content-wrapper {
     flex: 1;
     padding-left: 5rem;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .nav-content {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
+    position: relative;
+    transition: opacity 0.25s;
 }
 
-.pill-groups {
+.nav-content+.nav-content {
+    margin-top: 4rem;
+}
+
+.nav-content:not([active]) {
+    opacity: 0.25;
+    cursor: pointer;
+}
+
+about-content {
+    display: block;
+}
+
+about-content p {
+    margin: 0px;
+    font-size: 1.25em;
+}
+
+skills-content {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
-
-    height: 100%;
+    gap: 2rem;
 }
 
-.pill-groups .group {
+skills-content .group {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.pill-groups .group h2 {
+skills-content .group h2 {
     margin: 0px;
     font-size: 1.5em;
 }
 
-.pill-groups .group .pills {
+skills-content .group .pills {
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
+    align-items: center;
     gap: 0.3em;
 }
 
-.pill-groups .group .pills .pill {
+skills-content .group .pills .pill {
     display: inline-flex;
     padding: 0.25em 1em;
     border-radius: 5px;
     align-items: center;
 }
 
-.xp-groups {
+experience-content {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
-
-    height: 100%;
+    gap: 2rem;
 }
 
-.xp-groups .group {
+experience-content .group {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.xp-groups .group h2 {
+experience-content .group h2 {
     margin: 0px;
     font-size: 1.5em;
 }
 
-.xp-groups .group .xps {
+experience-content .group .xps {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 0.75em;
 }
 
-.xp-groups .group .xp {
+experience-content .group .xp {
     display: flex;
     flex-direction: column;
 
@@ -151,33 +154,29 @@ nav {
     background-color: rgb(220, 220, 220);
 }
 
-.xp-groups .group .xp h3 {
+experience-content .group .xp h3 {
     font-size: 1.125em;
     margin: 0px;
 }
 
-.xp-groups .group .xp .date,
-.xp-groups .group .xp .position {
+experience-content .group .xp .date,
+experience-content .group .xp .position {
     display: block;
     font-size: 0.9em;
 }
 
-.xp-groups .group .xp .links {
+experience-content .group .xp .links {
     display: flex;
     flex-direction: column;
     margin-top: auto;
 }
 
-.xp-groups .group .xp a {
+experience-content .group .xp a {
     color: #000000;
     text-decoration: none;
 }
 
-.xp-groups .group .xp a:hover {
-    text-decoration: underline;
-}
-
-.xp-groups .group .xp a::before {
+experience-content .group .xp a::before {
     content: "↗ ";
 }
 
@@ -247,11 +246,32 @@ nav {
         color: #ffffff;
     }
 
-    .xp-groups .group .xp {
+    experience-content .group .xp {
         background-color: rgb(60, 60, 60);
     }
 
-    .xp-groups .group .xp a {
+    experience-content .group .xp a {
         color: #ffffff;
+    }
+}
+
+@media (hover: hover) {
+    .nav-button:not(.nav-button[active]):hover {
+        cursor: pointer;
+        transform: translateX(5px);
+    }
+
+    #socials>a>svg:hover {
+        opacity: 0.5;
+    }
+
+    experience-content .group .xp a:hover {
+        text-decoration: underline;
+    }
+}
+
+@media (hover: hover) and (orientation: portrait) {
+    .nav-button:not(.nav-button[active]):hover {
+        transform: translateX(-5px);
     }
 }

@@ -62,7 +62,7 @@ nav {
     font-weight: bold;
 }
 
-#nav-content-wrapper {
+main {
     flex: 1;
     padding-left: 5rem;
     overflow: auto;
@@ -227,7 +227,7 @@ experience-content .group .xp a::before {
         padding: 0px;
     }
 
-    #nav-content-wrapper {
+    main {
         padding-left: 0px;
     }
 }

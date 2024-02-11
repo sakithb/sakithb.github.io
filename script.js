@@ -154,13 +154,13 @@ const experienceGroups = [
 
 let isNavScrolling = false;
 
-const navContentWrapper = document.querySelector("#nav-content-wrapper");
+const mainContent = document.querySelector("main");
 const intersectionObserver = new IntersectionObserver(observeIntersections, {
-    root: navContentWrapper,
+    root: mainContent,
     threshold: [0, 0.25, 0.5, 0.75, 1],
 });
 
-const navRect = navContentWrapper.getBoundingClientRect();
+const navRect = mainContent.getBoundingClientRect();
 const navTop = Math.round(navRect.top);
 const navBottom = Math.round(navRect.bottom);
 
@@ -189,18 +189,18 @@ function onNavScroll(content) {
  * @param {IntersectionObserverEntry[]} entries
  */
 function observeIntersections(entries) {
-    if (isNavScrolling) return;
-
     for (const entry of entries) {
         entry.target.setAttribute("intersecting-ratio", entry.intersectionRatio.toString());
     }
+
+    if (isNavScrolling) return;
 
     let currentName;
     let currentRatio = 0;
     let currentActive = false;
 
     for (const child of /** @type {HTMLCollectionOf<NavContentElement>} */ (
-        navContentWrapper.children
+        mainContent.children
     )) {
         const intersectingRatio = parseFloat(child.getAttribute("intersecting-ratio"));
 
@@ -228,6 +228,7 @@ class NavButtonElement extends HTMLElement {
     constructor() {
         super();
         this.classList.add("nav-button");
+        this.role = "button";
     }
 
     connectedCallback() {

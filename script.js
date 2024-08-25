@@ -94,6 +94,17 @@ const experienceGroups = [
                 ],
             },
             {
+                name: "hcb.lk",
+                position: "Creator",
+                date: "2024 - Present",
+                description:
+                    "An online marketplace for high-capacity bikes made in Golang and HTMX",
+                links: [
+                    { name: "Github", url: "https://github.com/sakithb/hcblk-server" },
+                    { name: "Live", url: "https://hcblk.live/" },
+                ],
+            },
+            {
                 name: "Media Controls",
                 position: "Creator",
                 date: "2021 - Present",
@@ -141,6 +152,16 @@ const experienceGroups = [
     {
         name: "Professional",
         items: [
+            {
+                name: "Tikslide",
+                position: "Fullstack Developer",
+                date: "2024 - Present",
+                description:
+                    "A website made in Golang and HTMX that lets you download tiktok videos and slideshows",
+                links: [
+                    { name: "Live", url: "https://tikslide.com/" },
+                ],
+            },
             {
                 name: "Fiverr and Upwork",
                 position: "Web Developer",

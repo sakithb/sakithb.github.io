@@ -74,37 +74,25 @@ const skillGroups = [
 /** @type {ExperienceGroup[]} */
 const experienceGroups = [
     {
-        name: "Professional",
+        name: "Open Source",
         items: [
             {
-                name: "Fiverr and Upwork",
-                position: "Web Developer",
-                date: "2021 - Present",
+                name: "Void Wars",
+                position: "Creator",
+                date: "2024 - Present",
                 description:
-                    "120+ web applications including browser extensions, websites and server-side tools",
-                links: [
-                    { name: "Fiverr profile", url: "https://www.fiverr.com/" },
-                    { name: "Upwork profile", url: "https://www.upwork.com/" },
-                ],
-            },
-            {
-                name: "WriteGPT",
-                position: "Backend Developer",
-                date: "Jan - Apr 2023",
-                description:
-                    "An chrome extension that integrates the power of OpenAI's GPT-4 into the browser",
+                    "A space invaders style game made in C with raylib, compiled to WebAssembly",
                 links: [
                     {
-                        name: "Website",
-                        url: "https://writegpt.ai/",
+                        name: "Github",
+                        url: "https://github.com/sakithb/void-wars",
+                    },
+                    {
+                        name: "Demo",
+                        url: "https://sakithb.me/void-wars",
                     },
                 ],
             },
-        ],
-    },
-    {
-        name: "Open Source",
-        items: [
             {
                 name: "Media Controls",
                 position: "Creator",
@@ -136,7 +124,7 @@ const experienceGroups = [
                 position: "Creator",
                 date: "2021 - Present",
                 description:
-                    "A search interface that combines search API from mutiple popular APIs",
+                    "A web application made in NextJS that lets you search popular websites in one place.",
                 links: [
                     {
                         name: "Github",
@@ -145,6 +133,35 @@ const experienceGroups = [
                     {
                         name: "Demo",
                         url: "https://powersearch.vercel.app",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        name: "Professional",
+        items: [
+            {
+                name: "Fiverr and Upwork",
+                position: "Web Developer",
+                date: "2021 - Present",
+                description:
+                    "120+ web applications including browser extensions, websites and server-side tools",
+                links: [
+                    { name: "Fiverr profile", url: "https://www.fiverr.com/" },
+                    { name: "Upwork profile", url: "https://www.upwork.com/" },
+                ],
+            },
+            {
+                name: "WriteGPT",
+                position: "Backend Developer",
+                date: "Jan - Apr 2023",
+                description:
+                    "An chrome extension that integrates the power of OpenAI's GPT-4 into the browser",
+                links: [
+                    {
+                        name: "Website",
+                        url: "https://writegpt.ai/",
                     },
                 ],
             },

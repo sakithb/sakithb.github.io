@@ -79,7 +79,7 @@ const experienceGroups = [
             {
                 name: "Void Wars",
                 position: "Creator",
-                date: "2024 - Present",
+                date: "Aug 2024",
                 description:
                     "A space invaders style game made in C with raylib, compiled to WebAssembly",
                 links: [
@@ -96,7 +96,7 @@ const experienceGroups = [
             {
                 name: "hcb.lk",
                 position: "Creator",
-                date: "2024 - Present",
+                date: "Jun 2024",
                 description:
                     "An online marketplace for high-capacity bikes made in Golang and HTMX",
                 links: [
@@ -105,22 +105,9 @@ const experienceGroups = [
                 ],
             },
             {
-                name: "Media Controls",
-                position: "Creator",
-                date: "2021 - Present",
-                description:
-                    "An extension for the GNOME Desktop on Linux to control media playback that supports MPRIS",
-                links: [
-                    {
-                        name: "Github",
-                        url: "https://github.com/sakithb/media-controls",
-                    },
-                ],
-            },
-            {
                 name: "Wallhub",
                 position: "Creator",
-                date: "2023 - Present",
+                date: "Nov 2023",
                 description:
                     "An extension for the GNOME Desktop on Linux to manage wallpapers",
                 links: [
@@ -131,9 +118,22 @@ const experienceGroups = [
                 ],
             },
             {
+                name: "Media Controls",
+                position: "Creator",
+                date: "Aug 2021",
+                description:
+                    "An extension for the GNOME Desktop on Linux to control media playback that supports MPRIS",
+                links: [
+                    {
+                        name: "Github",
+                        url: "https://github.com/sakithb/media-controls",
+                    },
+                ],
+            },
+            {
                 name: "Powersearch",
                 position: "Creator",
-                date: "2021 - Present",
+                date: "Sep 2021",
                 description:
                     "A web application made in NextJS that lets you search popular websites in one place.",
                 links: [
@@ -153,9 +153,20 @@ const experienceGroups = [
         name: "Professional",
         items: [
             {
+                name: "Fiverr and Upwork",
+                position: "Web Developer - Freelance",
+                date: "Jun 2020 - Present",
+                description:
+                    "120+ web applications including browser extensions, websites and server-side tools",
+                links: [
+                    { name: "Fiverr profile", url: "https://www.fiverr.com/users/realcliffniff/" },
+                    { name: "Upwork profile", url: "https://www.upwork.com/freelancers/~019e3c850ed70b9555" },
+                ],
+            },
+            {
                 name: "Tikslide",
-                position: "Fullstack Developer",
-                date: "2024 - Present",
+                position: "Fullstack Developer - Contract",
+                date: "May - Jul 2024",
                 description:
                     "A website made in Golang and HTMX that lets you download tiktok videos and slideshows",
                 links: [
@@ -163,19 +174,8 @@ const experienceGroups = [
                 ],
             },
             {
-                name: "Fiverr and Upwork",
-                position: "Web Developer",
-                date: "2021 - Present",
-                description:
-                    "120+ web applications including browser extensions, websites and server-side tools",
-                links: [
-                    { name: "Fiverr profile", url: "https://www.fiverr.com/" },
-                    { name: "Upwork profile", url: "https://www.upwork.com/" },
-                ],
-            },
-            {
                 name: "WriteGPT",
-                position: "Backend Developer",
+                position: "Backend Developer - Contract",
                 date: "Jan - Apr 2023",
                 description:
                     "An chrome extension that integrates the power of OpenAI's GPT-4 into the browser",
@@ -356,7 +356,7 @@ class AboutContentElement extends NavContentElement {
         super.connectedCallback();
 
         const aboutText = document.createElement("p");
-        aboutText.textContent = `I'm a web developer from Sri Lanka. I have been professionally developing web applications for over 3 years and have been practicing programming as a hobby for over 6 years. I have a passion for creating software and solving problems. I'm always looking for new opportunities to learn and grow.`;
+        aboutText.textContent = `I'm a software engineer from Sri Lanka specializing in web development. I have been professionally developing software for 4 years and have been practicing programming as a hobby for 8 years. I am passionate about creating software and learning new technologies.`;
 
         this.appendChild(aboutText);
     }
